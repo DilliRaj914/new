@@ -1,0 +1,43 @@
+<!-- %- include ../layouts/header.ejs %> -->
+
+<html><body>
+    <table border="1" cellpadding="7" cellspacing="7">
+      <tr>
+        
+        <th>ID</th>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>Age</th>
+      </tr>
+      <% if(data.length){ 
+        for(var i = 0;i < data.length;i++) { %>
+      <tr>
+        <td><%=data[i].id%></td>
+        <td><%=data[i].FirstName%></td>
+        <td><%=data[i].LastName%></td>
+        <td><%=data[i].Age%></td>
+        <td>
+            <div style="float:left">
+                <a href='/users/edit/<%= data[i].id %>'>Edit</a> &nbsp;	                         
+                <form method="post" action="/users/delete/<%= data[i].id %>" style="float:right">
+                    <input type="submit" name="delete" value='Delete' onClick="return confirm('Are you sure you want to delete?')" />
+                   
+                    <input type="hidden"  name="_method" value="Delete" />
+                   
+                </form>
+               
+            </div>
+        </td>
+      </tr>
+      <% }
+      }else{ %>
+      <tr>
+        <td colspan="3">No user</td>
+      </tr>
+    <% } %>
+    
+    </table>
+    <button type="submit"><a href="/users/add">ADD</a></button>
+    </body></html>
+
+<%- include ../layouts/footer.ejs %>
